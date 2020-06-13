@@ -1,4 +1,6 @@
 const cors = require("cors");
+const path = require('path');
+
 var corsOptions = {
   origin: 'your_configuration_page_url',
 }
@@ -43,7 +45,11 @@ const chatBotApi = axios.create({
 // Use CORS to avoid cross-site errors
 app.use(cors(corsOptions));
 
-app.listen(3000, () => console.log("Listening for webhooks"));
+app.get('/home', (request, response) => {
+  response.sendFile(path.join(__dirname + '/../index.html'));
+})
+
+app.listen(80, () => console.log("Listening for webhooks"));
 
 /// Authorization
 app.post("/auth", async (req, res) => {
