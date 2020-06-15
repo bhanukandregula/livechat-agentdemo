@@ -1,5 +1,6 @@
 const cors = require("cors");
 const path = require('path');
+require('dotenv').config();
 
 var corsOptions = {
   origin: 'your_configuration_page_url',
@@ -49,7 +50,10 @@ app.get('/home', (request, response) => {
   response.sendFile(path.join(__dirname + '/../index.html'));
 })
 
-app.listen(80, () => console.log("Listening for webhooks"));
+port = process.env.PORT;
+console.log("This is the active port: ", port);
+
+app.listen(port, () => console.log("Listening for webhooks"));
 
 /// Authorization
 app.post("/auth", async (req, res) => {
